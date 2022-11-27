@@ -9,13 +9,15 @@
         "@schematics/angular:component": {
           "inlineTemplate": true,
           "inlineStyle": true,
-          "skipTests": true
+          "skipTests": true,
+          "standalone": true
         },
         "@schematics/angular:class": {
           "skipTests": true
         },
         "@schematics/angular:directive": {
-          "skipTests": true
+          "skipTests": true,
+          "standalone": true
         },
         "@schematics/angular:guard": {
           "skipTests": true
@@ -24,7 +26,8 @@
           "skipTests": true
         },
         "@schematics/angular:pipe": {
-          "skipTests": true
+          "skipTests": true,
+          "standalone": true
         },
         "@schematics/angular:service": {
           "skipTests": true
@@ -92,6 +95,39 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "angular-webcontainer-template:build"
+          }
+        }
+      }
+    },
+    "logic": {
+      "projectType": "library",
+      "root": "projects/logic",
+      "sourceRoot": "projects/logic/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/logic/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/logic/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/logic/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/logic/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }
