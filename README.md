@@ -1,3 +1,3 @@
 # angular-standalone-webcontainer
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/angular-webcontainer-template-tidcwq)
+[Edit on StackBlitz ⚡️](https://github.com/Lonli-Lokli/angular-standalone-webcontainer)
