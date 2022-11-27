@@ -1,12 +1,21 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { bootstrapApplication } from '@angular/platform-browser';
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
+import { AppComponent } from './app/app.component';
+import { provideHttpClient } from '@angular/common/http';
 
-if (environment.production) {
-  enableProdMode();
-}
+bootstrapApplication(AppComponent, {
+  providers: [provideHttpClient()],
+})
+  .then((ref) => {
+    // Stackblitz: Ensure Angular destroys itself on hot reloads.
+    if (window['ngRef']) {
+      window['ngRef'].destroy();
+    }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+    window['ngRef'] = ref;
+
+    // Otherwise, log the boot error
+  })
+  .catch((err) => console.error(err));
